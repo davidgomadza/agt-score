@@ -126,6 +126,553 @@
             color: #a0a0ff;
         }
         
+        input[type="number"], input[type="range"] {
+            width: 100%;
+            padding: 12px;
+            background: rgba(30, 35, 70, 0.8);
+            border: 1px solid rgba(100, 120, 255, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-size: 1.1rem;
+        }
+        
+        input[type="range"] {
+            padding: 0;
+            height: 8px;
+            -webkit-appearance: none;
+            background: linear-gradient(90deg, #2a4b8d, #4286ff);
+            outline: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #6eb4ff;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(110, 180, 255, 0.8);
+        }
+        
+        .lifespan-display {
+            text-align: center;
+            padding: 30px;
+            background: rgba(10, 15, 40, 0.7);
+            border-radius: 15px;
+            margin-top: 20px;
+            border: 1px solid rgba(100, 120, 255, 0.2);
+        }
+        
+        .lifespan-value {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            background: linear-gradient(90deg, #42c5ff, #a68cff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(100, 150, 255, 0.4);
+        }
+        
+        .lifespan-label {
+            font-size: 1.2rem;
+            color: #a0a0ff;
+        }
+        
+        .timeline {
+            height: 30px;
+            background: rgba(30, 35, 70, 0.8);
+            border-radius: 15px;
+            margin: 30px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #2a4b8d, #4286ff, #6eb4ff);
+            border-radius: 15px;
+            width: 0%;
+            transition: width 1.5s ease-out;
+        }
+        
+        .timeline-markers {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            color: #a0a0ff;
+            font-size: 0.9rem;
+        }
+        
+        .adjustments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .adjustment {
+            background: rgba(30, 35, 70, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(100, 120, 255, 0.2);
+        }
+        
+        .adjustment:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            border-color: rgba(100, 150, 255, 0.5);
+        }
+        
+        .adjustment i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #6eb4ff;
+        }
+        
+        .adjustment-name {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .adjustment-value {
+            color: #a0a0ff;
+        }
+        
+        .orb-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            perspective: 800px;
+        }
+        
+        .orb {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #1a2b5f, #0d1637);
+            box-shadow: 
+                0 0 60px rgba(66, 141, 255, 0.6),
+                inset 0 0 40px rgba(0, 0, 0, 0.6);
+            position: relative;
+            animation: rotate 20s infinite linear;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+        
+        .orb-inner {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #42c5ff, #0d1637);
+            box-shadow: 
+                0 0 30px rgba(66, 141, 255, 0.8),
+                inset 0 0 20px rgba(0, 0, 0, 0.6);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid rgba(100, 120, 255, 0.3);
+            color: #a0a0ff;
+            font-size: 0.9rem;
+        }
+        
+        .disclaimer {
+            background: rgba(200, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 100, 100, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-dna"></i> AGT Score</h1>
+            <div class="subtitle">Advanced Genetic Synthesis Technology Dashboard</div>
+        </header>
+        
+        <div class="disclaimer">
+            <i class="fas fa-exclamation-triangle"></i> This is a conceptual simulation based on fictional research. The concepts presented are not supported by mainstream science.
+        </div>
+        
+        <div class="main-content">
+            <div class="panel">
+                <div class="panel-title"><i class="fas fa-sliders-h"></i> AGT Configuration</div>
+                
+                <div class="input-group">
+                    <label for="agt-coins"><i class="fas fa-coins"></i> AGT Coins</label>
+                    <input type="number" id="agt-coins" min="0" max="10000000" value="0" step="100">
+                    <input type="range" id="agt-coins-slider" min="0" max="10000000" value="0" step="100">
+                </div>
+                
+                <div class="input-group">
+                    <label for="age"><i class="fas fa-birthday-cake"></i> Biological Age</label>
+                    <input type="number" id="age" min="0" max="100" value="30">
+                    <input type="range" id="age-slider" min="0" max="100" value="30">
+                </div>
+                
+                <div class="input-group">
+                    <label for="telomere-adjustment"><i class="fas fa-ruler-combined"></i> Telomere Adjustment (cm)</label>
+                    <input type="number" id="telomere-adjustment" min="8" max="72" value="8">
+                    <input type="range" id="telomere-adjustment-slider" min="8" max="72" value="8">
+                </div>
+                
+                <div class="lifespan-display">
+                    <div class="lifespan-label">Projected Lifespan</div>
+                    <div class="lifespan-value" id="lifespan-value">72 years</div>
+                    <div class="lifespan-label" id="lifespan-category">Standard Human</div>
+                </div>
+            </div>
+            
+            <div class="panel">
+                <div class="panel-title"><i class="fas fa-chart-line"></i> Lifespan Visualization</div>
+                
+                <div class="orb-container">
+                    <div class="orb">
+                        <div class="orb-inner"></div>
+                    </div>
+                </div>
+                
+                <div class="timeline">
+                    <div class="progress" id="timeline-progress"></div>
+                </div>
+                
+                <div class="timeline-markers">
+                    <span>0 Years</span>
+                    <span>100 Years</span>
+                    <span>1,000 Years</span>
+                    <span>10K Years</span>
+                    <span>100K Years</span>
+                    <span>1M Years</span>
+                    <span>∞</span>
+                </div>
+                
+                <div class="lifespan-display">
+                    <div class="lifespan-label">AGT Efficiency</div>
+                    <div class="lifespan-value" id="efficiency-value">0.0%</div>
+                    <div class="lifespan-label">Bio-Enhancement Level</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <div class="panel-title"><i class="fas fa-cogs"></i> Biological Adjustments</div>
+            
+            <div class="adjustments-grid">
+                <div class="adjustment">
+                    <i class="fas fa-brain"></i>
+                    <div class="adjustment-name">Neural Optimization</div>
+                    <div class="adjustment-value">Level: <span id="neural-level">0</span></div>
+                </div>
+                
+                <div class="adjustment">
+                    <i class="fas fa-heart"></i>
+                    <div class="adjustment-name">Cardiac Output</div>
+                    <div class="adjustment-value">Level: <span id="cardiac-level">0</span></div>
+                </div>
+                
+                <div class="adjustment">
+                    <i class="fas fa-dna"></i>
+                    <div class="adjustment-name">DNA Repair</div>
+                    <div class="adjustment-value">Level: <span id="dna-level">0</span></div>
+                </div>
+                
+                <div class="adjustment">
+                    <i class="fas fa-shield-alt"></i>
+                    <div class="adjustment-name">Immune System</div>
+                    <div class="adjustment-value">Level: <span id="immune-level">0</span></div>
+                </div>
+                
+                <div class="adjustment">
+                    <i class="fas fa-sync-alt"></i>
+                    <div class="adjustment-name">Cellular Renewal</div>
+                    <div class="adjustment-value">Level: <span id="cellular-level">0</span></div>
+                </div>
+                
+                <div class="adjustment">
+                    <i class="fas fa-bolt"></i>
+                    <div class="adjustment-name">Metabolic Rate</div>
+                    <div class="adjustment-value">Level: <span id="metabolic-level">0</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>AGT Score Simulation | Based on the research of David Gomadza</p>
+            <p>This is a conceptual interface only. Not based on actual scientific principles.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Create stars in the background
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.width = `${Math.random() * 3}px`;
+            star.style.height = star.style.width;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.animationDuration = `${2 + Math.random() * 5}s`;
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            starsContainer.appendChild(star);
+        }
+        
+        // Get DOM elements
+        const agtCoinsInput = document.getElementById('agt-coins');
+        const agtCoinsSlider = document.getElementById('agt-coins-slider');
+        const ageInput = document.getElementById('age');
+        const ageSlider = document.getElementById('age-slider');
+        const telomereInput = document.getElementById('telomere-adjustment');
+        const telomereSlider = document.getElementById('telomere-adjustment-slider');
+        const lifespanValue = document.getElementById('lifespan-value');
+        const lifespanCategory = document.getElementById('lifespan-category');
+        const timelineProgress = document.getElementById('timeline-progress');
+        const efficiencyValue = document.getElementById('efficiency-value');
+        
+        // Sync input and slider values
+        agtCoinsInput.addEventListener('input', () => {
+            agtCoinsSlider.value = agtCoinsInput.value;
+            calculateLifespan();
+        });
+        
+        agtCoinsSlider.addEventListener('input', () => {
+            agtCoinsInput.value = agtCoinsSlider.value;
+            calculateLifespan();
+        });
+        
+        ageInput.addEventListener('input', () => {
+            ageSlider.value = ageInput.value;
+            calculateLifespan();
+        });
+        
+        ageSlider.addEventListener('input', () => {
+            ageInput.value = ageSlider.value;
+            calculateLifespan();
+        });
+        
+        telomereInput.addEventListener('input', () => {
+            telomereSlider.value = telomereInput.value;
+            calculateLifespan();
+        });
+        
+        telomereSlider.addEventListener('input', () => {
+            telomereInput.value = telomereSlider.value;
+            calculateLifespan();
+        });
+        
+        // Calculate lifespan based on inputs
+        function calculateLifespan() {
+            const agtCoins = parseInt(agtCoinsInput.value) || 0;
+            const age = parseInt(ageInput.value) || 30;
+            const telomere = parseInt(telomereInput.value) || 8;
+            
+            // Base lifespan calculation (fictional formula)
+            let baseLifespan = 80;
+            
+            // Adjust based on telomere size (fictional)
+            const telomereFactor = 1 + ((telomere - 8) / 64) * 2;
+            
+            // Adjust based on AGT coins (fictional)
+            const agtFactor = 1 + (Math.log10(agtCoins + 1) / 10) * 50;
+            
+            // Calculate final lifespan
+            let finalLifespan = baseLifespan * telomereFactor * agtFactor;
+            
+            // Adjust for current age
+            finalLifespan = finalLifespan - age + 30;
+            
+            // Ensure minimum lifespan
+            finalLifespan = Math.max(finalLifespan, age + 1);
+            
+            // Update display
+            if (finalLifespan > 1000000) {
+                lifespanValue.textContent = "Gega Quads ∞";
+                lifespanCategory.textContent = "Transcendent Being";
+            } else if (finalLifespan > 100000) {
+                lifespanValue.textContent = Math.round(finalLifespan / 1000) + "K Years";
+                lifespanCategory.textContent = "Near-Immortal";
+            } else if (finalLifespan > 10000) {
+                lifespanValue.textContent = Math.round(finalLifespan / 100) / 10 + "K Years";
+                lifespanCategory.textContent = "Virtually Immortal";
+            } else if (finalLifespan > 1000) {
+                lifespanValue.textContent = Math.round(finalLifespan / 100) / 10 + "K Years";
+                lifespanCategory.textContent = "Enhanced Human";
+            } else if (finalLifespan > 500) {
+                lifespanValue.textContent = Math.round(finalLifespan) + " Years";
+                lifespanCategory.textContent = "Advanced Human";
+            } else {
+                lifespanValue.textContent = Math.round(finalLifespan) + " Years";
+                lifespanCategory.textContent = "Standard Human";
+            }
+            
+            // Update timeline progress
+            const progressPercentage = Math.min(100, Math.log10(finalLifespan) / 7 * 100);
+            timelineProgress.style.width = `${progressPercentage}%`;
+            
+            // Update efficiency value
+            const efficiency = Math.min(100, (telomereFactor * agtFactor - 1) * 50);
+            efficiencyValue.textContent = efficiency.toFixed(1) + "%";
+            
+            // Update adjustment levels
+            document.getElementById('neural-level').textContent = Math.min(10, Math.floor(agtCoins / 100000));
+            document.getElementById('cardiac-level').textContent = Math.min(10, Math.floor(telomere / 10));
+            document.getElementById('dna-level').textContent = Math.min(10, Math.floor(agtCoins / 50000));
+            document.getElementById('immune-level').textContent = Math.min(10, Math.floor((telomere - 5) / 3));
+            document.getElementById('cellular-level').textContent = Math.min(10, Math.floor(agtCoins / 75000));
+            document.getElementById('metabolic-level').textContent = Math.min(10, Math.floor(telomere / 8));
+        }
+        
+        // Initialize calculation
+        calculateLifespan();
+    </script>
+</body>
+</html> s <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGT Score - Advanced Genetic Synthesis Technology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0b0b2d, #1a1a4a, #0b0b2d);
+            color: #e0e0ff;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(66, 141, 255, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(180, 80, 255, 0.2) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle linear infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(100, 120, 255, 0.3);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #42c5ff, #a68cff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(100, 150, 255, 0.4);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a0a0ff;
+            margin-bottom: 20px;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .panel {
+            background: rgba(20, 25, 60, 0.6);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 120, 255, 0.2);
+        }
+        
+        .panel-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #6eb4ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #a0a0ff;
+        }
+        
         input[type="number"], input[type="range"], input[type="text"] {
             width: 100%;
             padding: 12px;
